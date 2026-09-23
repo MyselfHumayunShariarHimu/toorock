@@ -1,0 +1,15 @@
+{
+  "buildCommand": "tar -xzf toorock-source.tar.gz --strip-components=1 && corepack enable && pnpm install --frozen-lockfile && pnpm build",
+  "outputDirectory": "dist/public",
+  "framework": null,
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

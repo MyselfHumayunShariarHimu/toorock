@@ -10,7 +10,7 @@ RUN tar -xzf toorock-source.tar.gz --strip-components=1 && rm toorock-source.tar
 RUN corepack enable && pnpm install --frozen-lockfile
 RUN pnpm build
 
-COPY deploy/torrc /etc/tor/torrc
+RUN mkdir -p /etc/tor && cp deploy/torrc /etc/tor/torrc
 ENV NODE_ENV=production
 ENV TOR_SOCKS_HOST=127.0.0.1
 ENV TOR_SOCKS_PORT=9050

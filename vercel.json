@@ -1,5 +1,5 @@
 {
-  "buildCommand": "tar -xzf toorock-source.tar.gz --strip-components=1 && corepack enable && pnpm install --no-frozen-lockfile && pnpm build",
+  "buildCommand": "tar -xzf toorock-source.tar.gz --strip-components=1 && npm install --legacy-peer-deps --no-audit --no-fund && npm run build",
   "outputDirectory": "dist/public",
   "framework": null,
   "cleanUrls": true,

@@ -19,4 +19,4 @@ ENV TOR_SOCKS_HOST=127.0.0.1
 ENV TOR_SOCKS_PORT=9050
 EXPOSE 3000
 
-CMD ["sh", "-c", "tor -f /etc/tor/torrc --RunAsDaemon 0 & TOR_PID=$!; for i in $(seq 1 90); do nc -z 127.0.0.1 9050 && break; kill -0 $TOR_PID 2>/dev/null || { wait $TOR_PID; exit 1; }; sleep 1; done; nc -z 127.0.0.1 9050 || { echo 'Tor SOCKS port did not become ready'; kill $TOR_PID; exit 1; }; exec pnpm start"]
+CMD ["sh", "-c", "su -s /bin/sh debian-tor -c 'exec tor -f /etc/tor/torrc --RunAsDaemon 0' & TOR_PID=$!; for i in $(seq 1 90); do nc -z 127.0.0.1 9050 && break; kill -0 $TOR_PID 2>/dev/null || { wait $TOR_PID; exit 1; }; sleep 1; done; nc -z 127.0.0.1 9050 || { echo 'Tor SOCKS port did not become ready'; kill $TOR_PID; exit 1; }; exec pnpm start"]

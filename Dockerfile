@@ -7,6 +7,7 @@ RUN apt-get update \
 WORKDIR /app
 COPY toorock-source.tar.gz ./
 RUN tar -xzf toorock-source.tar.gz --strip-components=1 && rm toorock-source.tar.gz
+RUN mkdir -p server/_core && printf '%s\n' 'export const ENV = process.env as Record<string, string | undefined>;' > server/_core/env.ts
 RUN corepack enable && pnpm install --frozen-lockfile
 RUN pnpm build
 
